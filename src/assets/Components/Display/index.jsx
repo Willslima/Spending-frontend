@@ -1,28 +1,24 @@
+import { useEffect, useState } from 'react'
 import './index.css'
 
 import Debts from '../Debts'
 
 function display() {
-  const dbt = [
-    {
-      description: 'Marketplace',
-      valuation: 150,
-      method: 'Nubank',
-      month: '16/09/2022'
-    },
-    {
-      description: 'Marketplace',
-      valuation: 150,
-      method: 'Santander',
-      month: '16/09/2022'
-    },
-    {
-      description: 'Marketplace',
-      valuation: 150,
-      method: 'Pix',
-      month: '16/09/2022'
-    }
-  ]
+
+  const [debts, setDebts] = useState([{
+    description: 'Marketplace',
+    valuation: 150,
+    method: 'Nubank',
+    month: '16/09/2022'
+  }]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/debts')
+    .then(response => response.json())
+    .then(data => { 
+      setDebts(data)
+  })
+    })
 
   return (
     <div className="display">
@@ -30,13 +26,14 @@ function display() {
       <div className="content">
         <div>
           <h4>September</h4>
-          {dbt.map(db => (
-            <Debts
-              description={db.description}
-              valuation={db.valuation}
-              method={db.method}
-              month={db.month}
-            />
+          {debts.map(debt =>(
+           <Debts 
+              key={debt.id}
+              description={debt.description}
+              valuation={debt.valuation}
+              method={debt.method}
+              month={debt.month}
+             />
           ))}
         </div>
       </div>
