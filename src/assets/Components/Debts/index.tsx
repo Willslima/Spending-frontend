@@ -1,6 +1,14 @@
 import './index.css'
 
-function Debts(props){
+export type TDebtsProps = {
+    id?: number,
+    description: string, 
+    valuation: number,
+    method: string,
+    month: string
+}
+
+function Debts(props: TDebtsProps){
     return (
         <div className='debts'>
             <ul>

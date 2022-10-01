@@ -1,11 +1,18 @@
 import { useEffect, useState } from 'react'
 import './index.css'
 
-import Debts from '../Debts'
+import Debts, { TDebtsProps } from '../Debts'
+
+type ApiResponse = { 
+  description: string,
+  valuation: number,
+  method: string,
+  month: string
+}
 
 function display() {
 
-  const [debts, setDebts] = useState([{
+  const [debts, setDebts] = useState<TDebtsProps[]>([{
     description: 'Marketplace',
     valuation: 150,
     method: 'Nubank',
@@ -27,13 +34,12 @@ function display() {
         <div>
           <h4>September</h4>
           {debts.map(debt =>(
-           <Debts 
+           <Debts
               key={debt.id}
               description={debt.description}
               valuation={debt.valuation}
               method={debt.method}
-              month={debt.month}
-             />
+              month={debt.month}              />
           ))}
         </div>
       </div>
